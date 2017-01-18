@@ -1,12 +1,10 @@
-const express = require('express');
+const http = require('http');
 const os = require('os');
 
-let app = express();
+let handleRequest = (req, res) => {
+  res.writeHead(200);
+  res.end(`Say my name: ${os.hostname()}`);
+};
 
-app.get('/', (req, res) => {
-  res.send(`Say my name: ${os.hostname()}`);
-});
-
-app.listen(3000, () => {
-  console.log('App listening on port 3000!');
-});
+let www = http.createServer(handleRequest);
+www.listen(3000);
